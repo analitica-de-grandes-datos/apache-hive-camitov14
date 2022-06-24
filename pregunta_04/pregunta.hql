@@ -44,3 +44,6 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+SELECT DISTINC vocal FROM tbl0
+LATERAL VIEW EXPLODE(c5) tbl1 AS vocal
+ORDER BY vocal;
