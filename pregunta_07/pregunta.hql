@@ -14,7 +14,7 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
 
 DROP TABLE IF EXISTS tbl0;
 CREATE TABLE tbl0 (
-    c1 INT,
+    c1 STRING,
     c2 STRING,
     c3 INT,
     c4 DATE,
@@ -48,7 +48,7 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 
 CREATE TABLE result AS 
 
-SELECT c2,CONCAT_WS(':',SORT_ARRAY(COLLECT_LIST(c1))) FROM tbl0
+SELECT c2,CONCAT_WS(':',SORT_ARRAY(COLLECT_LIST(c1))) AS list FROM tbl0
 GROUP BY c2 ;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
