@@ -35,7 +35,7 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 CREATE TABLE result AS 
 
 SELECT arr, key, count(c1) FROM t0
-LATERAL VIEW EXPLODE(c2) tbl1 AS arr,EXPLODE(c3) tbl2 AS key,value
+LATERAL VIEW EXPLODE(c2,c3) tbl1 AS arr,key,value
 GROUP BY arr,key;
 
 
