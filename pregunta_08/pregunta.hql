@@ -48,7 +48,8 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 */
 CREATE TABLE result AS 
 
-SELECT c2,EXPLODE(c6) AS key,value FROM tbl0
+SELECT c2, sum(value) FROM tbl0
+LATERAL VIEW EXPLODE(c6) tbl AS key,value
 GROUP BY c2 ;
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
