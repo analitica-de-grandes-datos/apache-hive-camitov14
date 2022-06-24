@@ -32,4 +32,14 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+CREATE TABLE result AS 
 
+SELECT arr, key, count(c1) FROM t0
+LATERAL VIEW EXPLODE(c2) tbl AS arr
+LATERAL VIEW EXPLODE(c3) tbl AS key,value
+GROUP BY arr,key;
+
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM result;
