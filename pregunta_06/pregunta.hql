@@ -45,4 +45,5 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
-
+SELECT UPPER(letter) FROM tbl0
+LATERAL VIEW explode(c5) tbl AS letter;
