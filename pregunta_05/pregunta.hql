@@ -46,7 +46,7 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 */
 CREATE TABLE result AS 
 
-SELECT YEAR(c4), COUNT(letter) FROM tbl0
+SELECT YEAR(c4), letter, COUNT(letter) FROM tbl0
 LATERAL VIEW explode(c5) tbl AS letter
 GROUP BY YEAR(C4),letter;
 
