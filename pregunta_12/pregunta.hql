@@ -34,9 +34,9 @@ LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE t0;
 */
 CREATE TABLE result AS 
 
-SELECT arr, key, count(c1) FROM t0
-LATERAL VIEW EXPLODE(c2,c3) tbl1 AS arr,key,value
-GROUP BY arr,key;
+SELECT arr, count(*) FROM t0
+LATERAL VIEW EXPLODE(c2) tbl1 AS arr
+GROUP BY arr;
 
 
 INSERT OVERWRITE LOCAL DIRECTORY './output'
