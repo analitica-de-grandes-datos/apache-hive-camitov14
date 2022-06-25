@@ -44,6 +44,10 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+CREATE TABLE result AS
 SELECT DISTINCT vocal FROM tbl0
 LATERAL VIEW EXPLODE(c5) tbl AS vocal
 ORDER BY vocal;
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM result;
