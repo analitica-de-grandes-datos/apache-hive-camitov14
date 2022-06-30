@@ -45,4 +45,14 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+CREATE TABLE inicial AS 
+SELECT t0.c1, t0.c2, t1.c4 FROM tbl0 t0 JOIN (SELECT c1,c4 FROM tbl1)t1 ON (t0.c1=t1.c1);
 
+DROP TABLE IF EXISTS result;
+CREATE TABLE result AS SELECT c1, c2, value 
+FROM inicial LATERAL VIEW explode(c4) exploded AS key, value
+WHERE key=c2;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+SELECT * FROM result;
